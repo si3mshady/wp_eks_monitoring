@@ -1,5 +1,4 @@
 version: '3.1'
-# https://github.com/go-sql-driver/mysql#dsn-data-source-name
 
 services:
 # https://hub.docker.com/r/prom/mysqld-exporter
@@ -55,14 +54,13 @@ services:
     volumes:
       - db:/var/lib/mysql
 
-
 volumes:
   wordpress:
   db:
 
 
 
-
+# https://github.com/go-sql-driver/mysql#dsn-data-source-name
   # https://github.com/go-sql-driver/mysql#dsn-data-source-name
     #  https://stackoverflow.com/questions/57347415/cant-monitor-mysql-using-prometheus-docker-and-prom-mysqld-exporter-image
     # https://github.com/prometheus/mysqld_exporter/issues/440

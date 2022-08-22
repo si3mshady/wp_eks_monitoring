@@ -1,0 +1,9 @@
+global:
+  scrape_interval:     15s
+
+scrape_configs:
+  - job_name: mysql_expoprter
+    static_configs:
+      - targets: ['mysql_exporter:9104']
+      # /sbin/ifconfig | grep  -A8  en0 | grep netmask get en0 ip and use it for a target 
+

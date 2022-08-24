@@ -19,8 +19,8 @@ output "metavpc" { value = module.vpc }
 module "eks" {
 
   source             = "./eks"
-  public_eks_subnets = output.metavpc.public_subnets
-  vpc_id             = output.metavpc.vpc_id
+  public_eks_subnets = module.vpc.metavpc.public_subnets
+  vpc_id             = module.vpc.metavpc.metavpc.vpc_id
 
 }
 

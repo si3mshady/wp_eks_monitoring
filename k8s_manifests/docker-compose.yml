@@ -1,0 +1,65 @@
+version: "3"
+services:
+# https://hub.docker.com/r/prom/mysqld-exporter
+  mysqlexporter:
+    image: prom/mysqld-exporter
+    ports:
+      - 9104:9104
+    environment:
+      - DATA_SOURCE_NAME=si3mshady:passwd@(db:3306)/
+    depends_on:
+      - db
+      - wordpress
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - '3000:3000'
+     
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./:/etc/prometheus/
+    command:
+    - '--config.file=/etc/prometheus/prom_config.yml'
+    ports:
+        - 9090:9090
+
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: si3mshady
+      WORDPRESS_DB_PASSWORD: passwd
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - wordpress:/var/www/html
+
+  db:
+    # platform: linux/x86_64
+    image: mysql:5.7
+    restart: always
+    ports: 
+      - 3306:3306 #port not exposed by default
+  
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: si3mshady
+      MYSQL_PASSWORD: passwd
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:
+
+
+
+# https://github.com/go-sql-driver/mysql#dsn-data-source-name
+  # https://github.com/go-sql-driver/mysql#dsn-data-source-name
+    #  https://stackoverflow.com/questions/57347415/cant-monitor-mysql-using-prometheus-docker-and-prom-mysqld-exporter-image
+    # https://github.com/prometheus/mysqld_exporter/issues/440

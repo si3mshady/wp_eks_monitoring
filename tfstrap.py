@@ -23,14 +23,12 @@ def create_root_structure():
 def get_current_directoy():
     return os.path.dirname(__file__)
 
-
 if __name__ == "__main__":
     modules = sys.argv[1:]
     create_root_structure()
 
     for mod in modules:
         create_subdirectory_structure(mod)
-
 
 #Elliott Arnold  Terraform bootstrapper - for modular tf deployments 
 #bootstrap tf module file structure using command line args 

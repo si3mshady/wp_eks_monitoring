@@ -19,7 +19,6 @@ resource "aws_eks_cluster" "elliotteks" {
  ]
 }
 
-
 resource "aws_security_group" "public_sg" {
 
   name   = "sandbox-eks-open"

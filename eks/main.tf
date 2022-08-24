@@ -112,12 +112,12 @@ resource "aws_iam_role" "workernodes" {
   node_group_name = "elliotts-eks-workernodes"
   node_role_arn  = aws_iam_role.workernodes.arn
   subnet_ids   = var.public_eks_subnets
-  instance_types = ["t2.micro"]
+  instance_types = ["t2.medium"]
  
   scaling_config {
-   desired_size = 1
-   max_size   = 1
-   min_size   = 1
+   desired_size = 3
+   max_size   = 3
+   min_size   = 3
   }
  
   depends_on = [

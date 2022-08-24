@@ -23,6 +23,10 @@ jobs:
         id: init 
         run: terraform init --upgrade
 
+      - name: Terraform Fmt 
+        id: format
+        run: terraform fmt
+
       - name: Terraform Apply
         id: deploy
         run: terraform apply --auto-approve

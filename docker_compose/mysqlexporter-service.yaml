@@ -13,7 +13,6 @@ spec:
   ports:
     - name: "9104"
       port: 9104
-      # nodePort: 31318
       targetPort: 9104
   selector:
     io.kompose.service: mysqlexporter

@@ -14,13 +14,11 @@ module "vpc" {
   }
 }
 
-output "metavpc" { value = module.vpc }
-
 module "eks" {
 
   source             = "./eks"
-  public_eks_subnets = module.vpc.metavpc.public_subnets
-  vpc_id             = module.vpc.metavpc.metavpc.vpc_id
+  public_eks_subnets = module.vpc.public_subnets
+  vpc_id             = module.vpc.vpc_id
 
 }
 

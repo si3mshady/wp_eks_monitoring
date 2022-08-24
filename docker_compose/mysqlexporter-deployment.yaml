@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mysqlexporter
+  name: mysqlexporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mysqlexporter
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: mysqlexporter
+    spec:
+      containers:
+        - env:
+            - name: DATA_SOURCE_NAME
+              value: si3mshady:passwd@(db:3306)/
+          image: prom/mysqld-exporter
+          name: mysqlexporter
+          ports:
+            - containerPort: 9104
+          resources: {}
+      restartPolicy: Always
+status: {}

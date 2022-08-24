@@ -17,7 +17,7 @@ module "vpc" {
 module "eks" {
 
   source             = "./eks"
-  public_eks_subnets = module.vpc.public_subnets_cidr_blocks
+  public_eks_subnets = [for cidr in module.vpc.public_subnets_cidr_blocks: cidr.public_subnets_cidr_blocks ]
   vpc_id             = module.vpc.vpc_id
 
 }

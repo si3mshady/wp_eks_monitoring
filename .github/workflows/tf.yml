@@ -26,7 +26,7 @@ jobs:
       - name: Terraform Apply
         id: deploy
         run: terraform apply --auto-approve
-        # continue-on-error: true
+   
 
 
         

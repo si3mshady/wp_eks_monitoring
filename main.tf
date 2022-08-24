@@ -23,6 +23,15 @@ output "metavpc" {
   
 }
 
+
+terraform {
+  backend "s3" {
+    bucket = "tf-state-for-si3mshady"
+    key    = "tfstate"
+    region = "us-east-1"
+  }
+}
+
 # module "eks" {
 #   source  = "terraform-aws-modules/eks/aws"
 #   version = "~> 18.0"

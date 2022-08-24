@@ -10,7 +10,7 @@ resource "aws_eks_cluster" "elliotteks" {
   role_arn = aws_iam_role.eks-iam-role.arn
 
   vpc_config {
-    subnet_ids = [for id in var.public_eks_subnets: id.id]
+    subnet_ids = [var.public_eks_subnets]
     security_group_ids =[aws_security_group.public_sg.id]
   }
 

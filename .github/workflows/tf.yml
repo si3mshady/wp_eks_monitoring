@@ -29,7 +29,10 @@ jobs:
 
       - name: Terraform Apply
         id: deploy
-        run: terraform apply --auto-approve
+        run: terraform destroy --auto-approve
+
+        # eksctl delete nodegroup --cluster=elliotteks --name=elliotts-eks-workernodes --disable-eviction
+
    
 
 

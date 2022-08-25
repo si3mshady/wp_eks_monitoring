@@ -3,9 +3,8 @@ import boto3, subprocess
 
 HOSTED_ZONE_ID = 'Z03316531PQU1MAY9ZO09'
 DOMAIN_NAME = 'elliottlamararnold.com'
+REGION = 'us-east-1'
 
-
-r53 = boto3.client('route53',region_name='us-east-1')
 
 
 def get_wordpress_alb_fqdn():
@@ -18,21 +17,26 @@ def get_wordpress_alb_fqdn():
 
 
 def map_alb_to_domain(hosted_zone_id=HOSTED_ZONE_ID, domain_name=DOMAIN_NAME):
-        r53.change_resource_record_sets(
-            HostedZoneId=hosted_zone_id,
-            ChangeBatch={
-            "Comment": "Creating Alias resource record sets in Route 53",
-            "Changes": [
-                {
-                "Action": "CREATE",
-                "ResourceRecordSet": { "Name": f"blog.{domain_name}", "Type": "CNAME", 'TTL': 120,
-                'ResourceRecords': [{'Value':  get_wordpress_alb_fqdn()},
-                    ]
+
+        r53 = boto3.client('route53',region_name=REGION)
+        try: 
+            r53.change_resource_record_sets(
+                HostedZoneId=hosted_zone_id,
+                ChangeBatch={
+                "Comment": "Creating Alias resource record sets in Route 53",
+                "Changes": [
+                    {
+                    "Action": "CREATE",
+                    "ResourceRecordSet": { "Name": f"blog.{domain_name}", "Type": "CNAME", 'TTL': 120,
+                    'ResourceRecords': [{'Value':  get_wordpress_alb_fqdn()},
+                        ]
+                    }
+                    }
+                ]
                 }
-                }
-            ]
-            }
-        )
+            )
+        except Exception as e:
+            print(e)
 
 
 if __name__ == "__main__":
@@ -49,3 +53,7 @@ if __name__ == "__main__":
 #  type A in zone Z03316531PQU1MAY9ZO09, but that target was not found]
 # Can only create an alias when you purchase domain via AWS. 
 #With an alias you can associate a domain with pre-existing aws resources 
+
+# helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx 
+
+#  helm install   cert-manager jetstack/cert-manager --version v1.7.1 --set installCRDs=true

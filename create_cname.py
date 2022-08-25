@@ -1,7 +1,6 @@
-from unicodedata import name
 import boto3, subprocess
 
-HOSTED_ZONE_ID = 'Z03316531PQU1MAY9ZO09'
+HOSTED_ZONE_ID = 'ZU1MAY9ZO09'
 DOMAIN_NAME = 'elliottlamararnold.com'
 REGION = 'us-east-1'
 

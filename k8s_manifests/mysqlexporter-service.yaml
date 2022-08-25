@@ -9,7 +9,7 @@ metadata:
     io.kompose.service: mysqlexporter
   name: mysqlexporter
 spec:
-  type: LoadBalancer
+  # type: LoadBalancer
   ports:
     - name: "9104"
       port: 9104

@@ -115,9 +115,9 @@ resource "aws_iam_role" "workernodes" {
   instance_types = ["t2.medium"]
  
   scaling_config {
-   desired_size = 3
-   max_size   = 3
-   min_size   = 3
+   desired_size = 1
+   max_size   = 1
+   min_size   = 1
   }
  
   depends_on = [

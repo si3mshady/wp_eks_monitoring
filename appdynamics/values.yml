@@ -1,0 +1,15 @@
+# To install Cluster Agent 
+installClusterAgent: true
+
+
+# AppDynamics controller info
+controllerInfo:
+  url: https://amelia202208280145255.saas.appdynamics.com:443
+  account: amelia202208280145255                     
+  username: elliottarnold                         
+  password:                               
+  accessKey: amn6udju9hqr
+
+# Cluster agent config
+clusterAgent:
+  nsToMonitorRegex: dev-.*
